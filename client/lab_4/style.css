@@ -93,7 +93,7 @@ form {
   /* this will push other blocks out of the way */
   border: 3px solid white;
   border-radius: 4px;
-  
+  position: relative;
   /* colors */
   background-color: D7BCC8;
   color: #4a4a4a;

@@ -330,11 +330,16 @@ form label {
     }
 
 }
+
 .lds-ellipsis {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+  .lds-ellipsis_hidden{
+    display: hidden
   }
   .lds-ellipsis div {
     position: absolute;
@@ -385,4 +390,3 @@ form label {
       transform: translate(24px, 0);
     }
   }
-  

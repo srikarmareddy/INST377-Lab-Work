@@ -24,7 +24,7 @@ function injectHTML(list) {
   const listEl = document.createElement('ol');
   target.appendChild(listEl);
   list.forEach((item) => {
-    const el = document.createElement('li');
+    const el = document.createElement('li')
     el.innerText = item.name;
     listEl.appendChild(el);
   })

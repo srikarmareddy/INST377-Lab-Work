@@ -92,6 +92,22 @@ function initMap() {
   return map;
 }
 
+function markerPlace(array, map) {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      layer.remove();
+    }
+  });
+
+  array.forEach((item, index) => {
+    const {coordinates} = item.geocoded_column_1;
+    L.marker([coordinates[1], coordinates[0]]).addTo(map);
+    if (index === 0) {
+      map.setView([coordinates[1], coordinates[0]], 10);
+    }
+  });
+}
+
 async function mainEvent() {
   /*
     ## Main Event
@@ -100,6 +116,7 @@ async function mainEvent() {
       If you separate your work, when one piece is complete, you can save it and trust it
   */
   const pageMap = initMap();
+
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
   const submit = document.querySelector('#get-resto'); // get a reference to your submit button
@@ -143,6 +160,7 @@ async function mainEvent() {
     console.log('input', event.target.value);
     const filteredListElements = filterList(currentList, event.target.value);
     injectHTML(filteredListElements);
+    markerPlace(filteredListElements, pageMap);
   });
 
   // And here's an eventListener! It's listening for a "submit" button specifically being clicked
@@ -156,6 +174,7 @@ async function mainEvent() {
 
     // And this function call will perform the "side effect" of injecting the HTML list for you
     injectHTML(currentList);
+    markerPlace(currentList, pageMap);
 
     // By separating the functions, we open the possibility of regenerating the list
     // without having to retrieve fresh data every time
